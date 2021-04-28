@@ -1,13 +1,3 @@
-'''
-import pygame
-pygame.init()
-size = (1200,680)
-pygame.display.set_mode(size)
-pygame.display.set_caption("Prate")
-logo = pygame.image.load('images\\icon.png')
-pygame.display.set_icon(logo)
-'''
-
 user_input = input('For sending a message to someone, press 1. For awaiting a message request from someone, press 2.')
 if user_input == '1' or user_input == '2':
     if int(user_input) == 1:
