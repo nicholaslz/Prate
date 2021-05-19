@@ -21,8 +21,7 @@ def main():
                  
 
                 try:
-                    socket_se
-rver.connect((server_host, s_port))
+                    socket_server.connect((server_host, s_port))
                     socket_server.send(name.encode())
 
 
