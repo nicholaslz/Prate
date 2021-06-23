@@ -1,5 +1,17 @@
 import json
 
+
+def doNothing():
+    while True:
+        pass
+    
+
+def makeOffline(username):
+    with open('userinfo.json', 'r+') as f:
+        users = json.load(f)
+        users[username]['Online'] = "false"
+        json.dump(users, f)
+
         
 def main():
     while True:
@@ -27,7 +39,7 @@ def main():
 
                 except:
                     print('Target not available')
-                    exit()
+                    doNothing()
 
 
                 server_name = socket_server.recv(1024)
@@ -44,7 +56,7 @@ def main():
 
                     except ConnectionResetError:
                         print('The target disconnected')
-                        return
+                        doNothing()
 
 
             elif int(user_input) == 2:
@@ -80,10 +92,12 @@ def main():
 
                     except ConnectionResetError:
                         print('The target disconnected')
-                        return
+                        doNothing()
+                        
         else:
             print('Input not recognized as a valid command')
-            return
+            doNothing()
+            
 
 
 def init():
@@ -105,11 +119,12 @@ def init():
 
             else:
                 print('Wrong password')
-                exit()
+                doNothing()
+                makeOffline(username)
 
         else:
             print('Username not recognized')
-            exit()
+            doNothing()
 
     elif int(userInput) == 2:
         username = input('Please set your username')
@@ -118,12 +133,12 @@ def init():
         with open('userinfo.json', 'r+') as f:
             users = json.load(f)
             
-        users[username] = {'Username': str(username), 'Password': str(password)}
+        users[username] = {'Username': str(username), 'Password': str(password), 'Online': "true"}
 
         with open('userinfo.json','r+') as f:
             json.dump(users, f)
         
-        main()
+        main()    
+
 
 init()
-
